@@ -64,20 +64,50 @@ namespace winForm_THEGIG
             double radius = 0.0;
             double area = 0.0;
             double circumference = 0.0;
-			if (double.TryParse(textBox4.Text, out radius))
+            if (double.TryParse(textBox4.Text, out radius))
             {
                 area = Math.PI * radius * radius;
-                circumference=2 * Math.PI * radius;
-				label6.Text = $"��鹷��ǧ����դ����ҡѺ {area:F2}" + Environment.NewLine +
-                               $"����ͺǧ�դ����ҡѺ {circumference:F2}";
-			}
+                circumference = 2 * Math.PI * radius;
+                label6.Text = $"พื้นที่วงกลมมีค่าเท่ากับ {area:F2}" + Environment.NewLine +
+                               $"เส้นรอบวงมีค่าเท่ากับ {circumference:F2}";
+            }
             else
             {
-                MessageBox.Show("��س����������շ��١��ͧ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("กรุณาใส่ค่ารัศมีที่ถูกต้อง", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
 
             }
         }
-    }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+			
+		
+			double baseLength, height;
+
+			// ตรวจสอบความยาวฐาน
+			if (!double.TryParse(textBox3.Text.Trim(), out baseLength) || baseLength <= 0)
+			{
+				MessageBox.Show("ความยาวฐานต้องเป็นตัวเลขและ > 0");
+				return;
+			}
+
+			// ตรวจสอบความสูง
+			if (!double.TryParse(textBox5.Text.Trim(), out height) || height <= 0)
+			{
+				MessageBox.Show("ความสูงต้องเป็นตัวเลขและ > 0");
+				return;
+			}
+
+			// คำนวณพื้นที่สามเหลี่ยม
+			double area = 0.5 * baseLength * height;
+
+			// แสดงผล (เลือก label ของคุณ เช่น label8)
+			label9.Text = "พื้นที่สามเหลี่ยม = " + area.ToString("0.##");
+		}
+
+
+	}
 }
+
